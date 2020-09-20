@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<title>Product | 1947</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="index.css">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+<body>
+  <header >
+    <div class="head">
+      <h2 style="font-family: 'Times New Roman', Times, serif; color: black;" >1947 Chase the Flavours</h2>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li class="dropdown">
+          <a href="" class="dropbtn" style="color: black">Menu</a>
+          <i class="fa fa-caret-down"></i>
+          <div class="dropdown-content">
+            <a href="#food">Flavours Specials</a>
+            <a href="#china">Chinese</a>
+
+          </div>
+        </li>
+
+        <li><a href="#" class="active">Services</a></li>
+        <li><a href="#" class="active">View Cart</a></li>
+        <li><a href="#" class="active">Feedback</a></li>
+        <li><a href="#" class="active">About Us</a></li>
+      </ul>
+    </nav>
+
+  </header>
+<!-- Navbar (sit on top) -->
+
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <!-- About Section -->
+  <div class="w3-row w3-padding-64" id="about">
+    
+  </div>
+
+  
+
+</div>
+</body>
+<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase.js"></script>
+<script type="text/javascript">
+  var firebaseConfig = {
+    apiKey: "AIzaSyAi-mXsp9IpKUoDo4A59BbsA0TxBjNb0lw",
+    authDomain: "restaurant-6e5ed.firebaseapp.com",
+    databaseURL: "https://restaurant-6e5ed.firebaseio.com",
+    projectId: "restaurant-6e5ed",
+    storageBucket: "restaurant-6e5ed.appspot.com",
+    messagingSenderId: "632447617294",
+    appId: "1:632447617294:web:08206a2421c64e3d58af5f"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  let ref=firebase.database().ref('FoodData')
+  ref.on('value',gotData,errData)
+
+  function gotData(data){
+    var sc=data.val();
+    var key=window.localStorage.getItem('foodpage')
+    document.getElementById("about").innerHTML+=
+    `
+    <div class="w3-col m6 w3-padding-large ">
+     <img src="`+sc[key].Image+`" alt="Table Setting" width="500" >
+    </div>
+
+    <div class="w3-col m6 w3-padding-large">
+      <h1 class="w3-center" id="">`+sc[key].FoodName+`</h1><br>
+      <h5 class="w3-center">Tradition since 1889</h5>
+      <p class="w3-large">`+sc[key].Description+`</p>
+      <p class="w3-large w3-text-grey w3-hide-medium">It's why one of the state's most popular rice dishes includes the 'bisi' (hot) prefix almost suggesting that you dare not serve this dish at any other temperature. For me, this is comfort food - a dish like an Ambur or Hyderabad biryani that was invented for Sunday afternoons. Where a siesta is usually the next logical step. It's a dish that's etched in my summer vacation memories in my city of birth - Bengaluru. </p>
+      <a href=""><button class="btn">Place order</button></a>
+      <a ><button class="btn" onclick=showpopup("myModal")>Add to Cart</button></a>
+      <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" id="myModal" >
+          <div class="modal-header">
+            <span class="close" onclick=hidepopup("myModal")>&times;</span>
+            <h2 class="popuphead">Add To Cart</h2>
+          </div>
+          <div class="modal-body">
+            <p class="popupbody">Bisi Bele Bath</p>
+            <p class="popupdetails">Cost = 100Rs</p>
+            <p class="popupdetails">GST = 10%</p>
+            <p class="popupdetails">Delivery Charges = 40Rs</p>
+            <label style="color:black">Quantity</label>
+            <input type="number" name="" placeholder="Enter the Quantity">
+            <p class="popupdetails">Total Cost = 150Rs</p>
+          </div>
+          <div class="modal-footer">
+            <a><button class="btn">Confirm</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+    
+  }
+  function errData(){
+
+  }
+  function showpopup(id){
+    document.getElementById(id).style.display="block"
+  }
+  function hidepopup(id){
+    document.getElementById(id).style.display="none"
+  }
+</script>
+<script type="text/javascript">
+  var modal = document.getElementById("myModal");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("myBtn");
+
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks the button, open the modal
+
+</script>
+</html>

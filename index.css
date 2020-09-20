@@ -1,0 +1,251 @@
+html{
+  scroll-behavior: smooth;
+}
+body{
+
+  background-color: black;
+
+}
+header{
+  top:0;
+  position: fixed;
+  width: 100%;
+  margin:auto;
+  background-color:white;
+  z-index: 999;
+  box-shadow: 10px 5px 18px;
+
+
+}
+.head{
+
+  float: left;
+  font-family: "Lucida Console", Monaco, monospace;
+  font-family: "Times New Roman", Times, serif;
+
+}
+nav{
+  float: right;
+  /*width: 100%;*/
+/*  background-color: black;*/
+}
+li{
+  display: inline;
+  padding: 1rem;
+}
+li a{
+  position: relative;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+}
+li a:hover{
+  background-color: rgb(0,0,0,0.8);
+  padding: 2em;
+  color: white;
+  border:none;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+ h1{
+
+  color: white;
+  font-family: cursive;
+  text-align: center;
+}
+ h3{
+  font-size:1em;
+  color: white;
+  font-family:"Lucida Console", Monaco, monospace;
+  letter-spacing: 1px;
+}
+p{
+  color: gold;
+}
+
+
+h4{
+  font-size: 1rem;
+  margin:3%;
+}
+.btn{
+
+
+}
+.btns{
+
+}
+a button {
+  background-color: white;
+  padding: 1em;
+  border:none;
+  border-radius: 8px;
+  position: relative;
+  margin-bottom: 5%;
+
+
+
+}
+.btn:hover{
+   background-color: gold;
+   padding: 1rem;
+   border:none;
+   border-radius: 8px;
+
+
+
+ }
+ .dropdown {
+
+   overflow: hidden;
+
+ }
+
+ .dropdown .dropbtn {
+   font-size: 16px;
+   border: none;
+   outline: none;
+   color: white;
+   padding: 14px 16px;
+   background-color: inherit;
+   font-family: inherit;
+   margin: 0;
+ }
+
+ .navbar a:hover, .dropdown:hover .dropbtn {
+   background-color:gray;
+
+
+ }
+
+ .dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f9f9f9;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+   margin-left: 5%;
+   margin-top:1%;
+ }
+
+ .dropdown-content a {
+   float: none;
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+   text-align: left;
+
+ }
+
+ .dropdown-content a:hover {
+  /* background-color: #ddd;*/
+ }
+
+ .dropdown:hover .dropdown-content {
+   display: block;
+ }
+ .dropdown-content a:hover {
+  padding: 0.4em;
+  border-radius: 0px;
+  color: white;
+ /*background-color: #ddd;*/}
+
+ /* The Modal (background) */
+ .modal {
+   display: none; /* Hidden by default */
+   position: fixed; /* Stay in place */
+   z-index: 1; /* Sit on top */
+   padding-top: 100px; /* Location of the box */
+   left: 0;
+   top: 0;
+   width: 100%; /* Full width */
+   height: 100%; /* Full height */
+   overflow: auto; /* Enable scroll if needed */
+   background-color: rgb(0,0,0); /* Fallback color */
+   background-color: rgba(0,0,0,0.4);
+   border:1px solid black;
+   border-radius: 20px;
+    /* Black w/ opacity */
+ }
+
+ /* Modal Content */
+ .modal-content {
+
+   position: relative;
+   background-color: #fefefe;
+   margin: auto;
+   padding: 0;
+   border: 1px solid #888;
+   width: 30%;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+   -webkit-animation-name: animatetop;
+   -webkit-animation-duration: 0.4s;
+   animation-name: animatetop;
+   animation-duration: 0.4s
+ }
+
+ /* Add Animation */
+ @-webkit-keyframes animatetop {
+   from {top:-300px; opacity:0}
+   to {top:0; opacity:1}
+ }
+
+ @keyframes animatetop {
+   from {top:-300px; opacity:0}
+   to {top:0; opacity:1}
+ }
+
+ /* The Close Button */
+ .close {
+   color: white;
+   float: right;
+   font-size: 28px;
+   font-weight: bold;
+ }
+
+ .close:hover,
+ .close:focus {
+   color: #000;
+   text-decoration: none;
+   cursor: pointer;
+ }
+
+ .modal-header {
+   padding: 2px 16px;
+   background-color: black;
+   color: white;
+ }
+
+ .modal-body {padding: 2px 16px;}
+
+ .modal-footer {
+   padding: 2px 16px;
+   background-color: black;
+   color: white;
+ }
+
+ .dropdown:hover .dropdown-content {display: block;}
+
+ .dropdown:hover .dropbtn {
+
+
+ }
+ .popuphead{
+   color: white;
+   font-size: 1.2em;
+
+ }
+ .popupbody{
+   color: black;
+   font-size: 1.4em;
+
+ }
+ .popupdetails{
+   color: black;
+   font-size: 1em;
+
+ }

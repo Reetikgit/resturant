@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chase the Flavours</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="slide.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <header >
+      <div class="head">
+        <h2 style="font-family: 'Times New Roman', Times, serif; color: black;" >1947 Chase the Flavours</h2>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropbtn" style="color: black">Menu</a>
+            <i class="fa fa-caret-down"></i>
+            <div class="dropdown-content">
+              <a href="#food">Flavours Specials</a>
+              <a href="#china">Chinese</a>
+
+            </div>
+          </li>
+          <li><a href="#" class="active">Services</a></li>
+          <li><a href="#" class="active">Feedback</a></li>
+          <li><a href="#" class="active">About Us</a></li>
+          <li id="login" style="display:none;"><a href="login.html" class="active">Login/Signup</a></li>
+          <li id="user" style="display: none;"><a href="#" class="active"id="username" onclick="logout()"></a></li>
+        </ul>
+      </nav>
+
+    </header>
+    <!-- <div class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px;" id="home"> -->
+      <img class="w3-image" src="img2.jpg"  width="1600" height="400">
+      <div class=" w3-padding-large w3-opacity">
+        <h1 class="w3-xxlarge newclass">Chase the Flavours</h1>
+      </div>
+
+    <div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:100px;"id="food" >
+        
+    </div>
+  </body>
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase.js"></script>
+  <script type="text/javascript">
+    var key=window.localStorage.getItem('loggedinuser')
+    var firebaseConfig = {
+      apiKey: "AIzaSyAi-mXsp9IpKUoDo4A59BbsA0TxBjNb0lw",
+      authDomain: "restaurant-6e5ed.firebaseapp.com",
+      databaseURL: "https://restaurant-6e5ed.firebaseio.com",
+      projectId: "restaurant-6e5ed",
+      storageBucket: "restaurant-6e5ed.appspot.com",
+      messagingSenderId: "632447617294",
+      appId: "1:632447617294:web:08206a2421c64e3d58af5f"
+    };
+    firebase.initializeApp(firebaseConfig);
+    let formMessage = firebase.database().ref('FoodData');
+    let formMessage2 = firebase.database().ref('Category');
+    let formMessage3 = firebase.database().ref('User');
+    let formMessage4 = firebase.database().ref('Cart');
+    formMessage3.on('value',showUser)
+    var name;
+    function showUser(data){
+
+      var sc3=data.val()
+   
+        if(sc3==null){
+          localStorage.clear();
+        }
+      if(key!=null){
+        document.getElementById("username").innerHTML=sc3[key].Name
+        document.getElementById("user").style.display="block"
+        document.getElementById("login").style.display="none"
+      }else{
+      
+        document.getElementById("login").style.display="block"
+      }
+    }
+    function logout(){
+      var ans=confirm("Are you sure to logout")
+      if(ans){
+        window.localStorage.removeItem('loggedinuser');
+        window.location="index.html"
+      }
+    }
+    formMessage2.on('value',showCategory,errData);
+    function showCategory(data){
+      var sc2=data.val()
+      var keys=Object.keys(sc2)
+      // $('#food').empty()
+      for(var i=0;i<keys.length;i++){
+        var k=keys[i];
+        document.getElementById("food").innerHTML+=
+        `
+        <h1 class="w3-xxlarge">`+sc2[k].Category+`</h1>
+        <div class="w3-row-padding w3-padding-16 w3-center" id="`+sc2[k].Category+`" >
+        </div>
+        `
+      }
+
+      formMessage.on('value',gotData,errData);
+    }
+    function gotData(data){
+      sc=data.val();
+      keys =Object.keys(sc);
+      // $('#fooditems').empty();
+      for(var i=0;i<keys.length;i++){
+          var k=keys[i];
+          name=sc[k].FoodName;
+          var description=sc[k].Description;
+          var price=sc[k].FoodPrice;
+          var image=sc[k].Image;
+          var category=sc[k].Category;
+
+          document.getElementById(category).innerHTML+=
+          `<div class="w3-quarter">
+            <a onclick=opennew("`+k+`")><img src="`+image+`" alt="Sandwich" style="width:100%"></a>
+            <h3>`+name+`</h3>
+            <p style="display: none;" id="desc">`+description+`</p>
+            <a><button class="btn" id="myBtn" onclick=showmodel("myModal`+i+`") >Add To Cart</button></a>
+
+            <div id="myModal`+i+`" class="modal" style="display:none">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <span class="close" onclick=hidemodel("myModal`+i+`")>&times;</span>
+                  <h2 class="popuphead">Add To Cart</h2>
+                </div>
+                <div class="modal-body">
+                  <p class="popupbody">`+name+`</p>
+                  <p class="popupdetails">Cost = `+price+`</p>
+                  <p class="popupdetails">GST = 10%</p>
+                  <p class="popupdetails">Delivery Charges = 40Rs</p>
+                  <label style="color:black">Quantity</label>
+                  <input type="number" name="" placeholder="Enter the Quantity" id="quantity`+i+`">
+                  <p class="popupdetails">Total Cost = 150Rs</p>
+                </div>
+                <div class="modal-footer">
+                  <a><button class="btn"  onclick=addCart("`+price+`","quantity`+i+`")>Confirm</button></a>
+                </div>
+              </div>
+
+            </div>
+            <a ><button class="btn" onclick="showDesc()">View More</button></a>
+          </div>
+          `
+      }
+    }
+    function opennew(key){
+      window.localStorage.setItem('foodpage', key);
+      window.location="product.html"
+      
+    }
+    function addCart(price,id){
+      if(key!=null){
+      var quantity=document.querySelector('#'+id).value
+      let newformMessage=formMessage4.push()
+      newformMessage.set({
+        FoodName :name,
+        FoodPrice:price,
+        Quantity:quantity,
+        UserID:key
+      })
+      alert("Data Added in Cart")
+      window.location="cart.html"
+    }else{
+      window.location="login.html"
+    }
+
+    }
+    function errData(){
+      
+    }
+ 
+
+    // When the user clicks the button, open the modal
+    function showmodel(index) {
+      if(key!=null)
+        document.getElementById(index).style.display = "block";
+      else
+        window.location="login.html"
+    }
+    function hidemodel(index) {
+      document.getElementById(index).style.display = "none";
+    }
+
+    function showDesc(){
+
+      
+      i++;
+      if(i%2!=0){
+        document.getElementById("desc").style.display="block";
+      }else{
+    
+        document.getElementById("desc").style.display="none";
+      }
+
+    }
+
+
+  </script>
+
+</html>

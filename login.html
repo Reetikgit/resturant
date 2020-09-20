@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V3</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+			<div class="wrap-login100">
+
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Enter email">
+						<input class="input100" type="email" name="username" placeholder="Email" id="email">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password" id="pass">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+
+					<div class="contact100-form-checkbox">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						<label class="label-checkbox100" for="ckb1">
+							Remember me
+						</label>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" id="btn">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-90">
+						<a class="txt1" href="Signup.html">
+							Not a user? Signup here
+						</a>
+					</div>
+		
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+	
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.19.0/firebase.js"></script>
+
+</body>
+<script type="text/javascript">
+	var key=window.localStorage.getItem('loggedinuser');
+	if(key!=null){
+		window.location="index.html"
+	}
+	var firebaseConfig = {
+	  apiKey: "AIzaSyAi-mXsp9IpKUoDo4A59BbsA0TxBjNb0lw",
+	  authDomain: "restaurant-6e5ed.firebaseapp.com",
+	  databaseURL: "https://restaurant-6e5ed.firebaseio.com",
+	  projectId: "restaurant-6e5ed",
+	  storageBucket: "restaurant-6e5ed.appspot.com",
+	  messagingSenderId: "632447617294",
+	  appId: "1:632447617294:web:08206a2421c64e3d58af5f"
+	};
+	// Initialize Firebase
+	firebase.initializeApp(firebaseConfig);
+	let ref= firebase.database().ref('User');
+	ref.on('value',gotData,errData)
+	btn.addEventListener('click',logind)
+	var sc,keys;
+	function gotData(data){
+
+		sc=data.val();
+		keys=Object.keys(sc);
+		
+	}
+	function logind(){
+		var email=document.querySelector('#email').value
+		var pass=document.querySelector('#pass').value
+		var found=false;
+		var k;
+		if(email!=""||pass!=""){
+			for(var i=0;i<keys.length;i++){
+				k=keys[i]
+				if(sc[k].Email==email&&sc[k].Password==pass){
+					found=true;
+					break;
+				}
+				
+			}
+			if(found == true){
+				alert("Login Successfull")
+				window.localStorage.setItem('loggedinuser', k);
+				window.location="index.html"
+			}
+
+		}else{
+			alert("Please enter your email and password")
+		}
+
+
+	}
+	function errData(){
+
+	}
+</script>
+</html>
