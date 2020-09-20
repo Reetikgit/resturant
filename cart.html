@@ -135,7 +135,7 @@
       if(name!=""||email!=""||add!="")
       sendData(name,email,add,city,state,zip)
     else{
-      alert("Please enter details in all feilds")
+      alert("Please enter details in all feilds"    )
     }
     }
     function sendData(name,email,add,city,state,zip){
@@ -155,6 +155,7 @@
     let formMessage4 = firebase.database().ref('Cart');
     formMessage4.on('value',gotData,errData)
     function gotData(data){
+      var count=0;
       sc=data.val();
       keys =Object.keys(sc);
       var total=0;
@@ -167,17 +168,19 @@
           var userid=sc[k].UserID; 
           price=price*parseInt(quantity)
           if(key==userid){
+            count++;
             document.getElementById('cartdata').innerHTML+=
             `
             <p><a href="#">`+name+`</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>`+quantity+`</span> <span class="price">`+price+`</span></p><span class="pric"><i class="fa fa-trash" onclick=deleteData("`+k+`")></span></i>
 
             `
             var total=total+parseInt(price);
+            document.getElementById("totalitem").innerHTML=count;
           }
 
     }
 
-    document.getElementById("totalitem").innerHTML=keys.length
+
     document.getElementById("totalprice").innerHTML=total;
   }
   function errData(){

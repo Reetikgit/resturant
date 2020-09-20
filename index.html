@@ -140,7 +140,7 @@
                   <p class="popupdetails">Total Cost = 150Rs</p>
                 </div>
                 <div class="modal-footer">
-                  <a><button class="btn"  onclick=addCart("`+price+`","quantity`+i+`")>Confirm</button></a>
+                  <a><button class="btn"  onclick=addCart("`+k+`","`+price+`","quantity`+i+`")>Confirm</button></a>
                 </div>
               </div>
 
@@ -150,17 +150,18 @@
           `
       }
     }
-    function opennew(key){
-      window.localStorage.setItem('foodpage', key);
+    function opennew(foodkey){
+      window.localStorage.setItem('foodpage', foodkey);
       window.location="product.html"
       
     }
-    function addCart(price,id){
+    function addCart(k,price,id){
+      
       if(key!=null){
       var quantity=document.querySelector('#'+id).value
       let newformMessage=formMessage4.push()
       newformMessage.set({
-        FoodName :name,
+        FoodName :sc[k].FoodName,
         FoodPrice:price,
         Quantity:quantity,
         UserID:key
